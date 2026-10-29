@@ -1,4 +1,4 @@
 interface:
   display_name: "校园世界自动构建"
-  short_description: "把校园参考转成可验收的造世界场景，复用坐标、资产、落位与玩法验证流程"
-  default_prompt: "使用 $campus-world-build，根据我提供的校园地图、建筑照片和玩法构想，先确认编辑器连接与现有场景，再分区构建、验证并记录结果。"
+  short_description: "按官方地图主动找逐楼照片，持续补齐校园建筑与场地，保存验收并减少重复确认"
+  default_prompt: "使用 $campus-world-build，复刻我指定的学校和校区；请自行找官方地图与逐栋照片，按全图清单持续生成、落位、接地与验收，基础完整后再美化玩法。"

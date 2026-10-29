@@ -1,0 +1,118 @@
+{
+  "templateVersion": 1,
+  "scope": {
+    "school": null,
+    "campus": null,
+    "extent": "whole-campus-unless-user-specified",
+    "phase": "baseline-replication",
+    "priority": [
+      "map-coverage",
+      "complete-geometry-and-grounding",
+      "photo-fidelity",
+      "landscape-and-decoration",
+      "gameplay"
+    ],
+    "preserve": [],
+    "exclude": [],
+    "resourceBoundaries": {}
+  },
+  "map": {
+    "sources": [],
+    "date": null,
+    "orientation": null,
+    "scaleBasis": "unknown",
+    "inventoryComplete": false
+  },
+  "coordinateFrame": {
+    "origin": null,
+    "axes": null,
+    "units": null,
+    "confidence": "unverified"
+  },
+  "environment": {
+    "editorVersion": null,
+    "projectIdentity": null,
+    "availableTools": [],
+    "restoreSteps": [],
+    "authorization": {}
+  },
+  "items": [],
+  "itemTemplate": {
+    "id": null,
+    "campusName": null,
+    "kind": "building-or-road-or-gate-or-sports-area-or-other-map-element",
+    "mapEvidence": [],
+    "photoSearch": {
+      "queriesTried": [],
+      "sourcesViewed": [],
+      "identityBasis": null,
+      "anglesCovered": [],
+      "gaps": []
+    },
+    "generationTask": {
+      "referenceImages": [],
+      "featuresToPreserve": [],
+      "knownDimensions": {},
+      "estimatedDimensions": {},
+      "placement": {},
+      "budget": {}
+    },
+    "geometryCoverage": "not-started",
+    "deliveryStage": "not-generated",
+    "artifacts": {
+      "sourceFiles": [],
+      "sha256": [],
+      "assetIds": [],
+      "instanceIds": []
+    },
+    "checks": {
+      "mapPlacement": "not-checked",
+      "photoSimilarity": "not-checked",
+      "wholeGeometry": "not-checked",
+      "grounding": "not-checked",
+      "entranceAndRoute": "not-checked",
+      "nativeSave": "not-checked",
+      "runtime": "not-checked"
+    },
+    "evidence": [],
+    "result": "not-done",
+    "gaps": [],
+    "nextAction": null
+  },
+  "ruleChecks": [],
+  "jobs": [],
+  "capacity": {},
+  "lastSavedState": {},
+  "nextQueue": [],
+  "questionsRequiringUserDecision": [],
+  "statusVocabulary": {
+    "geometryCoverage": [
+      "not-started",
+      "placeholder",
+      "partial",
+      "whole-candidate",
+      "whole-verified"
+    ],
+    "deliveryStage": [
+      "not-generated",
+      "generating",
+      "generated",
+      "imported",
+      "placed",
+      "saved",
+      "visually-verified",
+      "runtime-verified"
+    ],
+    "checks": [
+      "not-checked",
+      "passed",
+      "failed",
+      "not-applicable"
+    ],
+    "result": [
+      "not-done",
+      "needs-correction",
+      "meets-agreed-criteria"
+    ]
+  }
+}
