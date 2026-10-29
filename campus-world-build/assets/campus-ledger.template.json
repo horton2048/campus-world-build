@@ -21,7 +21,9 @@
     "date": null,
     "orientation": null,
     "scaleBasis": "unknown",
-    "inventoryComplete": false
+    "inventoryComplete": false,
+    "itemIds": [],
+    "reviewEvidence": []
   },
   "coordinateFrame": {
     "origin": null,
@@ -77,7 +79,13 @@
     "evidence": [],
     "result": "not-done",
     "gaps": [],
-    "nextAction": null
+    "nextAction": null,
+    "scopeMembership": "in-scope",
+    "scopeChange": {
+      "requestedBy": null,
+      "reason": null,
+      "evidence": []
+    }
   },
   "ruleChecks": [],
   "jobs": [],
@@ -113,6 +121,83 @@
       "not-done",
       "needs-correction",
       "meets-agreed-criteria"
+    ],
+    "scopeMembership": [
+      "in-scope",
+      "excluded"
+    ]
+  },
+  "durability": {
+    "checkpointTool": "scripts/campus_checkpoint.py",
+    "authoritativeStore": "<task-directory>/campus-checkpoint.sqlite3",
+    "recoveryIndex": "<task-directory>/RESUME.md (generated; never authoritative)",
+    "recordLayout": "One project/main contract; separate item and job records. Do not paste the whole ledger into a new context.",
+    "newContextReadOrder": [
+      "SKILL.md",
+      "resume command output",
+      "project/main",
+      "listed unresolved jobs",
+      "current item",
+      "actual editor/project and live job readback"
+    ],
+    "writeBoundaries": [
+      "Before every external mutation: commit prepared intent/fingerprint/target",
+      "After submission: commit original handle and tool evidence",
+      "After each item/batch, before context compaction, handoff or stopping: persist save version, evidence, next work, budget and decisions"
+    ],
+    "jobStates": [
+      "prepared",
+      "submitted",
+      "running",
+      "unknown",
+      "succeeded",
+      "failed",
+      "cancelled"
+    ],
+    "jobTemplate": {
+      "id": null,
+      "intent": null,
+      "fingerprint": null,
+      "target": null,
+      "operation": null,
+      "status": "prepared",
+      "sceneMutation": false,
+      "handle": null,
+      "strategy": "default",
+      "retryOf": null,
+      "observation": {
+        "status": null,
+        "terminal": false,
+        "source": null,
+        "observedAt": null,
+        "evidence": []
+      },
+      "inputSnapshot": {
+        "sourceFile": null,
+        "sha256": null
+      },
+      "expectedChange": null,
+      "baseline": null
+    },
+    "jobRules": [
+      "prepared may already have caused a remote write if interrupted before recording the handle",
+      "Observation timeout or missing handle does not prove failure",
+      "Inspect original handle/target and prove terminal before a conflicting retry",
+      "Do not reopen terminal jobs; new retry references retryOf",
+      "After two failures of one fingerprint/strategy, change method with evidence",
+      "Terminal attempt snapshots and strategy are immutable; attach later evidence to the item/project record",
+      "inputSnapshot, expectedChange and baseline are immutable from prepared; changed source needs a separately identified linked attempt after resolving any conflicting live job"
+    ],
+    "validationBoundary": "The helper validates records and transactions; Agent must inspect real evidence, complete full-map acceptance and execute the next work. It does not call tools, schedule turns or create a background service.",
+    "recordLimitBytes": 65536,
+    "resumeDefaultPerList": 8,
+    "resumeMaximumPerList": 20,
+    "scopeRules": [
+      "scope.exclude contains stable item IDs, not free-form region names",
+      "Items default to in-scope. Keep excluded historical records instead of deleting them.",
+      "First update project scope.exclude with the user-requested ID; then set item.scopeMembership=excluded with scopeChange requestedBy=user, nonempty reason and evidence.",
+      "Completion compares map.itemIds against current in-scope items; excluded history remains listable, and unresolved jobs still block completion.",
+      "To restore: reopen a completed project as active, reactivate the retained item, then remove its ID from project scope.exclude and re-review map coverage."
     ]
   }
 }

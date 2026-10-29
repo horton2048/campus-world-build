@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+campus-checkpoint.sqlite3*
+RESUME.md

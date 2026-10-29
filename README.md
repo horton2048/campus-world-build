@@ -24,9 +24,9 @@ cp -R campus-world-build/campus-world-build ~/.agents/skills/
 
 目录因工具而异；也可以直接让 Agent 读取 `campus-world-build/SKILL.md`。然后说：
 
-> 使用 `$campus-world-build`，复刻【学校】【校区】。请自行找官方地图和逐栋建筑照片，按全图清单持续生成、落位、接地与验收；先完整基础设施，再美化玩法。普通步骤自行继续，只有真实身份冲突、预算权限和重要取舍集中问我。
+> 使用 `$campus-world-build`，复刻【学校】【校区】。
 
-需要更多范围和资源约定时，复制[完整启动任务](campus-world-build/assets/start-prompt.md)。工作记录可从[全校园清单模板](campus-world-build/assets/campus-ledger.template.json)开始；这是 Agent 的任务台账，不是编辑器配置文件。
+学校、校区、范围和资源约定已经说过的直接沿用。Agent 按 Skill 自行展开工作；需要指定例外时，可补充[完整启动任务](campus-world-build/assets/start-prompt.md)。必要登录或首次费用边界仍须本人确定，可以集中处理，不必逐楼喂照片。
 
 ## 它怎样减少重复对话
 
@@ -34,7 +34,16 @@ cp -R campus-world-build/campus-world-build ~/.agents/skills/
 2. 将已确认的全校园范围、先基础后玩法、完整楼体与接地门槛写入每批任务。
 3. 用同来源小样验证导入规则，随后自动逐栋/分区循环；遇一处缺图或失败，记录并换下一处可做项目。
 4. 分清占位、局部、整栋、照片精修、保存与运行状态，报告全图覆盖变化，避免用局部成功掩盖缺项。
-5. 保存来源、当前场景、在途任务和下一步；中断先读回，减少重复生成与重新配置。
+5. 外部操作前记录意图，操作后留句柄与证据；超时先查原任务和场景，避免重复生成/导入。
+6. 用持久检查点和短恢复卡跨上下文续做，逐栋详情按需读取；失败次数、全图缺项和预算不会因为换会话清零。
+
+## 长程任务怎样接着做
+
+Agent 按[长程循环协议](campus-world-build/references/long-running.md)执行，使用自带的 [Python 标准库检查点工具](campus-world-build/references/checkpoint-tool.md) 保存任务约定、逐栋记录、异步作业与历史；它不需要额外安装依赖。短恢复卡默认限制在16 KiB，小窗口可压至4 KiB，只列当前要读的索引；全量资料留在文件中，按需读取。没有脚本能力时有等价分项文件方案。
+
+恢复只需说“继续复刻【学校】【校区】”。Agent 先读回权威作业和场景，再选全图下一项；原工具未确认结果时不会重新发一份。工具负责保存与记录校验，实际地图、照片、画面、接地与运行仍由 Agent 使用编辑器核验。
+
+Skill 本身不运行后台进程，也不替已停止的宿主自动续跑。宿主正在执行时持续循环；停止或上下文切换后保留恢复入口，不默认创建定时任务。预算耗尽或依赖受阻会保留未完成项，不能伪装成完整校园已验收。
 
 ## 编辑器与工具前提
 
@@ -47,5 +56,16 @@ cp -R campus-world-build/campus-world-build ~/.agents/skills/
 - [`SKILL.md`](campus-world-build/SKILL.md)：地图、照片、批量制作、验收和续接的主流程。
 - [`references/`](campus-world-build/references/)：原始诉求、工具边界和失败经验。
 - [`scripts/inspect_glb.py`](campus-world-build/scripts/inspect_glb.py)：Python 3 标准库的只读容器检查；不负责生成、导入或视觉验收。
+- [`scripts/campus_checkpoint.py`](campus-world-build/scripts/campus_checkpoint.py)：本地持久记录、版本冲突检查、未知操作去重和有界恢复摘要；不调用编辑器或生成模型。
 
-已做文档/模板和离线脚本检查；未以新校园完整重跑验证“最少对话达到同等效果”。本仓库原创代码与文档按 [MIT License](LICENSE) 发布，不包含原始聊天、校园图片、编辑器或场景数据，第三方工具及其资源遵循各自许可。
+失败处方见[北工大经验](campus-world-build/references/case-lessons.md)：每项区分历史实际修复、应采取的路径及未验证边界。已做文档/模板和离线脚本检查；未以新校园完整重跑验证“最少对话达到同等效果”。本仓库原创代码与文档按 [MIT License](LICENSE) 发布，不包含原始聊天、校园图片、编辑器或场景数据，第三方工具及其资源遵循各自许可。
+
+本地检查点回归测试（不调用编辑器、不消耗生成额度）：
+
+```bash
+python3 -B -m unittest discover -s tests -v
+```
+
+2026-10-30 实测18项通过，覆盖中断后读回、未知写入查重、并发版本冲突、事务崩溃、151项分页恢复、中文长记录的4 KiB整体预算、分页集合变化、假完成拒绝和历史保留；这些测试证明记录机制，不能替代新校园的真实生成与视觉验收。
+
+另以两个独立 Agent 实际执行合成工程：一句话启动与中断接手均完成地图内 5/5 项；恢复时复用已存在资产，并在全图复核中补出漏列场地。这是离线工作流验证，不是真实校园的照片、尺寸或运行验收。

@@ -1,4 +1,4 @@
 interface:
   display_name: "校园世界自动构建"
-  short_description: "按官方地图主动找逐楼照片，持续补齐校园建筑与场地，保存验收并减少重复确认"
-  default_prompt: "使用 $campus-world-build，复刻我指定的学校和校区；请自行找官方地图与逐栋照片，按全图清单持续生成、落位、接地与验收，基础完整后再美化玩法。"
+  short_description: "一句话指定校园，主动逐楼查图施工，以持久检查点跨上下文续做并完整验收"
+  default_prompt: "使用 $campus-world-build，复刻我指定的学校和校区。"
