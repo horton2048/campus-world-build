@@ -25,7 +25,7 @@
 
 ## 质量与依赖
 
-先读取当前底座的 `awc://docs/agent-production` 或仓库 `cli/skills/world-production/SKILL.md`。新生产底座以 `world create/next/dispatch/settle/control` 管理制作：主 Agent 调用 MCP→CLI 登记任务并取得派发工作单，再由宿主运行器启动真实会话；完成后将真实会话结果通过 `world settle` 写回。CLI 不会自己启动 Agent。生产会话通过 `production_native` 调用 MCP→CLI 原子能力；宿主缺少所需会话运行能力时记录阻塞，不把工作单当成已执行。先完成设计合同、真实参考和独立审查，施工任务使用已批准设计，验收使用 `world audit/deliver` 和真实场景证据。旧版 `world make/plan/build/run/resume`、`world continue/pause`、`layout *`、`world quality-*` 已从此底座移除，不能按旧说明调用；不同版本先查询实际帮助，缺接口就记录缺口，不能猜参数或回退到其他未经授权的入口。
+先读取当前底座的 `awc://docs/agent-production` 或仓库 `cli/skills/world-production/SKILL.md`。新生产底座以 `world create/next/dispatch/settle/control` 管理制作：主 Agent 调用 MCP→CLI 登记任务并取得派发工作单，再由宿主运行器启动真实会话；完成后将真实会话结果通过 `world settle` 写回。CLI 不会自己启动 Agent。登记校园施工或审查任务时，在任务 `skills` 中加入 `campus-world-build`，让 dispatch 将校园 Skill 及施工、原生操作参考连同 hash 固定到会话；主 Agent 仍须先读取校园 Skill 并完成需求对齐。生产会话通过 `production_native` 调用 MCP→CLI 原子能力；宿主缺少所需会话运行能力时记录阻塞，不把工作单当成已执行。先完成设计合同、真实参考和独立审查，施工任务使用已批准设计，验收使用 `world audit/deliver` 和真实场景证据。旧版 `world make/plan/build/run/resume`、`world continue/pause`、`layout *`、`world quality-*` 已从此底座移除，不能按旧说明调用；不同版本先查询实际帮助，缺接口就记录缺口，不能猜参数或回退到其他未经授权的入口。
 
 已完成设计、工具调用成功和世界验收是不同状态。实际查看各区域截图，进行正常输入试玩，保存并完整关闭后重开；不把模拟测试或设计字段齐全当作原生完成。
 
