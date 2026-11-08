@@ -1,4 +1,4 @@
 interface:
   display_name: "校园世界自动构建"
-  short_description: "共创校园外观、玩法与风格；新建或优化已有世界，经MCP→CLI自主施工、验收和续做"
+  short_description: "共创校园外观、玩法与风格；经原生工具或电脑操作自主施工、验收和续做"
   default_prompt: "使用 $campus-world-build，复刻我指定的学校和校区。"

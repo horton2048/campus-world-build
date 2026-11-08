@@ -66,6 +66,8 @@ Agent 会区分你的投入、机器执行时间和平台等待。没有本项�
 
 Agent 应先读[开工与时间预估](campus-world-build/references/agent-workbench.md)，自行检查官方指南、当前能力和目标工程。官方入口、社区工具来源和实际分工均在 [Skill 的工具说明](campus-world-build/references/guide-and-mcp.md) 与[工具路由](campus-world-build/references/tool-routing.md)中，不需要新手先读完再开始。没有可靠的生成或编辑能力时，它会明确报告卡点，先做能完成的准备，不把清单说成作品。
 
+操作入口优先遵守用户要求：MCP 和 CLI 可用时可通过原生工具施工；未接通时，用户允许且 Agent 具备电脑操作能力，可通过编辑器界面操作。两条路的能力与精度以实际测试为准；如果用户禁止电脑操作，不能自动切换。单独下载本 Skill 不会自动安装或配置 MCP、CLI 或编辑器。
+
 ## 给 Agent 与进阶使用者
 
 - [Skill 主流程](campus-world-build/SKILL.md)：地图 → 照片 → 制作 → 验收 → 续做。
