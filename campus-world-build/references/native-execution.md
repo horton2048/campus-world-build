@@ -8,12 +8,12 @@
 
 | 阶段 | CLI 命令族，经 MCP 调用 |
 |---|---|
-| 测试工程 | `editor create-test/open/scene/save/close`；项目清单可用 `project list` |
+| 测试工程 | `project list/copy-test`、`editor create-test/open/scene/save/close`；copy-test 仅在实际版本支持时使用 |
 | 资产 | `library search/fetch/snapshot`、`asset inspect/import`、`resource *` |
-| 摆放 | `surface geometry/sample`、`layout *`、`scene edit-inspect/edit-apply` |
+| 摆放 | `surface geometry/sample`、`scene edit-inspect/edit-apply`；先从帮助和原生测量结果核对支持的动作 |
 | 地形 | `terrain survey/sample/flatten-plan/flatten/smooth-plan/smooth` |
 | 正常试玩与实图 | `runtime start/status/input/observe/media/stop` |
-| 质量与续做 | `world quality-*`、原任务 `world reconcile/resume` |
+| 质量与续做 | `world progress/audit/continue`；按实际工具支持读取任务与证据 |
 
 这里只列路由，不保证所有子命令适用于任意工程。整栋建筑保留真实尺度，不套用摆件限制；真实网格、朝向、支持点和地形决定接地。项目中文重命名会退出旧 TEST 名称保护，不能为了继续写入自动放宽检查或把正式作品改名。
 
@@ -25,6 +25,8 @@
 
 ## 质量与依赖
 
-`world make` 正式制作须有真实填写的 quality 合约，技术样板显式 prototype。`native completed` 与艺术验收分开，`needs_quality_review` 继续用当前源做试玩、实图审查和 quality-status，不重放制作。完整质量输入见仓库 `cli/docs/world-quality.md`；单独安装 Skill 时缺该文件，应从实际 CLI 文档读取，不能猜参数。
+先读取当前底座的 `awc://docs/agent-production` 或仓库 `cli/skills/world-production/SKILL.md`。新生产底座以 `world create/continue` 和生产 MCP 工具管理设计、任务、证据与审查；由生产会话通过 `production_native` 调用 MCP→CLI 原子能力。先完成设计合同、真实参考和独立审查，施工任务使用已批准设计，验收使用 `world audit/deliver` 和真实场景证据。旧版 `world make/plan/build/run/resume`、`layout *`、`world quality-*` 已从此底座移除，不能按旧说明调用；不同版本先查询实际帮助，缺接口就记录缺口，不能猜参数或回退到其他未经授权的入口。
+
+已完成设计、工具调用成功和世界验收是不同状态。实际查看各区域截图，进行正常输入试玩，保存并完整关闭后重开；不把模拟测试或设计字段齐全当作原生完成。
 
 没有可用 MCP 或原生连接时，若用户允许且电脑操作工具和编辑器可用，可按 [电脑操作](computer-use.md) 继续；否则完成资料和计划并报告缺项。匹配工程身份无法核实时不得写入。不让用户手摆模型来冒充自动制作。登录和必要权限仍由本人完成。Unity/SDK是单独依赖，不因为原生编辑器可用就自动安装或激活。
