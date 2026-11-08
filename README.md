@@ -22,6 +22,8 @@
 
 把方括号替换为自己的学校和校区。若 Agent 不能读取仓库，点 **Code → Download ZIP**，解压后把其中含 `SKILL.md` 的整个 `campus-world-build` 文件夹交给它；保留 `references`、`assets` 和 `scripts`。安装位置由所用 Agent 决定，不需要你猜目录。
 
+让 Agent 核对 Skill 是否已被当前工具发现；如果暂时不能自动发现，仍可让它直接读取该文件夹中的 `SKILL.md` 使用。连接编辑器所需的 MCP、CLI 或电脑操作能力由 Agent 检查；本仓库不会自动把它们安装好。
+
 加载完成后，日常启动只需：
 
 > 使用 `$campus-world-build`，复刻【学校全名】【校区全名】。
